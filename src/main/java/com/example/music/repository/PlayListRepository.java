@@ -1,4 +1,7 @@
 package com.example.music.repository;
 
-public interface PlayListRepository {
+import com.example.music.model.PlayList;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PlayListRepository extends JpaRepository<PlayList, Long> {
 }

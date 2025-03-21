@@ -1,25 +1,30 @@
 package com.example.music.service;
 
+import com.example.music.model.PlayList;
+import com.example.music.repository.PlayListRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
-public class PlaylistService {
+public class PlayListService {
 
-    private final PlaylistRepository playlistRepository;
+    private final PlayListRepository playlistRepository;
 
-    public PlaylistService(PlaylistRepository playlistRepository) {
+    public PlayListService(PlayListRepository playlistRepository) {
         this.playlistRepository = playlistRepository;
     }
 
-    public Playlist createPlaylist(Playlist playlist) {
+    public PlayList createPlaylist(PlayList playlist) {
         return playlistRepository.save(playlist);
     }
 
-    public List<Playlist> getAllPlaylists() {
+    public List<PlayList> getAllPlaylists() {
         return playlistRepository.findAll();
     }
 
-    public Optional<Playlist> getPlaylistById(Long id) {
+    public Optional<PlayList> getPlaylistById(Long id) {
         return playlistRepository.findById(id);
     }
 
