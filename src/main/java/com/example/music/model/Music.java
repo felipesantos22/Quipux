@@ -1,5 +1,6 @@
 package com.example.music.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,7 +9,7 @@ public class Music {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private String titulo;
     private String artista;
@@ -16,11 +17,15 @@ public class Music {
     private Integer ano;
     private String genero;
 
+    @ManyToOne
+    @JoinColumn(name = "playlist_id", nullable = false)
+    @JsonIgnore
+    private PlayList playList;
+
     // Construtor padrão
     public Music() {
     }
 
-    // Construtor com parâmetros
     public Music(String titulo, String artista, String album, Integer ano, String genero) {
         this.titulo = titulo;
         this.artista = artista;
@@ -29,12 +34,21 @@ public class Music {
         this.genero = genero;
     }
 
-    // Getters e Setters
-    public Long getId() {
+    public Music(String titulo, int id, String artista, String album, Integer ano, String genero, PlayList playList) {
+        this.titulo = titulo;
+        this.id = id;
+        this.artista = artista;
+        this.album = album;
+        this.ano = ano;
+        this.genero = genero;
+        this.playList = playList;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -76,5 +90,13 @@ public class Music {
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public PlayList getPlayList() {
+        return playList;
+    }
+
+    public void setPlayList(PlayList playList) {
+        this.playList = playList;
     }
 }

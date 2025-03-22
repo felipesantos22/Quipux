@@ -19,7 +19,7 @@ public class PlayListController {
 
     @PostMapping
     public ResponseEntity<PlayList> createPlaylist(@RequestBody PlayList playlist) {
-        PlayList savedPlaylist = playlistService.createPlaylist(playlist);
+        PlayList savedPlaylist = playlistService.createPlaylist(playlist.getNome(), playlist.getDescricao());
         return ResponseEntity.ok(savedPlaylist);
     }
 
@@ -29,14 +29,14 @@ public class PlayListController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PlayList> getPlaylistById(@PathVariable Long id) {
+    public ResponseEntity<PlayList> getPlaylistById(@PathVariable int id) {
         Optional<PlayList> playlist = playlistService.getPlaylistById(id);
         return playlist.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePlaylist(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePlaylist(@PathVariable int id) {
         if (playlistService.deletePlaylist(id)) {
             return ResponseEntity.ok().build();
         }
