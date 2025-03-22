@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/playlists")
+@RequestMapping("api/playlists")
 public class PlayListController {
     private final PlayListService playlistService;
 
