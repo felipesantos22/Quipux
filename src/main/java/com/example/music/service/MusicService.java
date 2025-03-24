@@ -4,6 +4,7 @@ import com.example.music.model.Music;
 import com.example.music.model.PlayList;
 import com.example.music.repository.MusicRepository;
 import com.example.music.repository.PlayListRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,4 +41,12 @@ public class MusicService {
     public List<Music> getAllMusics() {
         return musicRepository.findAll();
     }
+
+    public void deleteMusic(int id) {
+        if (!musicRepository.existsById(id)) {
+            throw new EntityNotFoundException("Música com ID " + id + " não encontrada.");
+        }
+        musicRepository.deleteById(id);
+    }
+
 }
