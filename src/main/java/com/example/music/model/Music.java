@@ -21,8 +21,6 @@ public class Music {
     @JoinColumn(name = "playlist_id", nullable = false)
     @JsonIgnore
     private PlayList playList;
-
-    // Construtor padrão
     public Music() {
     }
 

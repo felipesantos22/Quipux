@@ -9,25 +9,20 @@ public class PlayList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nome;
     private String descricao;
-
 
     @OneToMany(mappedBy = "playList", cascade = CascadeType.ALL)
     private List<Music> musicas;
 
-    // Construtor padrão
     public PlayList() {}
 
-    // Construtor com parâmetros
     public PlayList(String nome, String descricao, List<Music> musicas) {
         this.nome = nome;
         this.descricao = descricao;
         this.musicas = musicas;
     }
 
-    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
