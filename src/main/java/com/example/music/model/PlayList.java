@@ -13,8 +13,8 @@ public class PlayList {
     private String nome;
     private String descricao;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    // @JoinColumn(name = "playlist_id")
+
+    @OneToMany(mappedBy = "playList", cascade = CascadeType.ALL)
     private List<Music> musicas;
 
     // Construtor padrão
