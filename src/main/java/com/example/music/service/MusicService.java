@@ -42,11 +42,12 @@ public class MusicService {
         return musicRepository.findAll();
     }
 
-    public void deleteMusic(int id) {
-        if (!musicRepository.existsById(id)) {
-            throw new EntityNotFoundException("Música com ID " + id + " não encontrada.");
+    public boolean deleteMusic(int id) {
+        if (musicRepository.existsById(id)) {
+            musicRepository.deleteById(id);
+            return true;
         }
-        musicRepository.deleteById(id);
+        return false;
     }
 
 }

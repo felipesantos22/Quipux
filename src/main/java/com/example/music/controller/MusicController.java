@@ -1,5 +1,6 @@
 package com.example.music.controller;
 
+import com.example.music.DTO.ApiResponse;
 import com.example.music.model.Music;
 import com.example.music.model.PlayList;
 import com.example.music.service.MusicService;
@@ -37,10 +38,19 @@ public class MusicController {
         return musicService.getAllMusics();
     }
 
-    @DeleteMapping("/{idMusic}")
+    /*@DeleteMapping("/{idMusic}")
     public ResponseEntity<String> deleteMusic(@PathVariable int idMusic) {
         musicService.deleteMusic(idMusic);
         return ResponseEntity.ok("Música deletada com sucesso.");
+    }*/
+    @DeleteMapping("/{idMusic}")
+    public ResponseEntity<ApiResponse> deleteMusic(@PathVariable int idMusic) {
+        if (musicService.deleteMusic(idMusic)) {
+            return ResponseEntity.ok(new ApiResponse("Música deletada com sucesso!", 200));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiResponse("Música não encontrada.", 404));
+        }
     }
 
 }
