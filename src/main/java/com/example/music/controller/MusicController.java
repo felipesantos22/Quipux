@@ -26,10 +26,8 @@ public class MusicController {
         try {
             Music musicaCriada = musicService.createMusic(playlistId, musica.getTitulo(), musica.getArtista(), musica.getAlbum(), musica.getAno(), musica.getGenero());
             return ResponseEntity.ok(musicaCriada);
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Playlist não encontrada.");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao criar música.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("PlayList not found.");
         }
     }
 

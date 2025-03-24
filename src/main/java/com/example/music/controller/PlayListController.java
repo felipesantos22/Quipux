@@ -1,7 +1,9 @@
 package com.example.music.controller;
 
+import com.example.music.DTO.ApiResponse;
 import com.example.music.model.PlayList;
 import com.example.music.service.PlayListService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,10 +38,12 @@ public class PlayListController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePlaylist(@PathVariable int id) {
+    public ResponseEntity<ApiResponse> deletePlaylist(@PathVariable int id) {
         if (playlistService.deletePlaylist(id)) {
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(new ApiResponse("Playlist deletada com sucesso!", 200));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiResponse("Playlist não encontrada.", 404));
         }
-        return ResponseEntity.notFound().build();
     }
 }

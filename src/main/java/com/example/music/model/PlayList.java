@@ -14,7 +14,7 @@ public class PlayList {
     private String descricao;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "playlist_id")
+    // @JoinColumn(name = "playlist_id")
     private List<Music> musicas;
 
     // Construtor padrão
